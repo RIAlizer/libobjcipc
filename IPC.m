@@ -230,7 +230,13 @@ static OBJCIPC *sharedInstance = nil;
 	SpringBoard *app = (SpringBoard *)[UIApplication sharedApplication];
 	
 	SBApplicationController *controller = [objc_getClass("SBApplicationController") sharedInstance];
-	SBApplication *application = [controller applicationWithDisplayIdentifier:identifier];
+    SBApplication *application = nil;
+    
+    if ([application respondsToSelector:@selector(applicationWithDisplayIdentifier:)]) {
+        application = [controller applicationWithDisplayIdentifier:identifier];
+    } else {
+        application = [controller applicationWithBundleIdentifier:identifier];
+    }
 	
 	if (application == nil) {
 		IPCLOG(@"App with identifier <%@> cannot be found", identifier);
