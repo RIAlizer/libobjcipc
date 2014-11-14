@@ -232,7 +232,7 @@ static OBJCIPC *sharedInstance = nil;
 	SBApplicationController *controller = [objc_getClass("SBApplicationController") sharedInstance];
     SBApplication *application = nil;
     
-    if ([application respondsToSelector:@selector(applicationWithDisplayIdentifier:)]) {
+    if ([controller respondsToSelector:@selector(applicationWithDisplayIdentifier:)]) {
         application = [controller applicationWithDisplayIdentifier:identifier];
     } else {
         application = [controller applicationWithBundleIdentifier:identifier];
